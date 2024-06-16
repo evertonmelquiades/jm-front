@@ -5,5 +5,15 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withXsrfConfiguration } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient()]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideHttpClient(
+      withFetch(),
+      withXsrfConfiguration({
+        cookieName: 'XSRF-TOKEN', // Nome do cookie onde o token CSRF é armazenado
+        headerName: 'X-XSRF-TOKEN' // Nome do header onde o token CSRF é enviado
+      })
+    )
+  ]
 };
