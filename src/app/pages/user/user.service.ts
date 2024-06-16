@@ -11,23 +11,23 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8000/api/users');
+    return this.http.get<User[]>('https://api-jm.vercel.app/api/api/users');
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`http://localhost:8000/api/users/${id}`);
+    return this.http.get<User>(`https://api-jm.vercel.app/api/api/users${id}`);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`http://localhost:8000/api/users/${user.id}`, user);
+    return this.http.put<User>(`https://api-jm.vercel.app/api/api/users${user.id}`, user);
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8000/api/users', user);
+    return this.http.post<User>('https://api-jm.vercel.app/api/api/users', user);
   }
 
   deleteUser(user: User): Observable<User> {
-    return this.http.delete<User>(`http://localhost:8000/api/users/${user.id}`);
+    return this.http.delete<User>(`https://api-jm.vercel.app/api/api/users${user.id}`);
   }
 }
 

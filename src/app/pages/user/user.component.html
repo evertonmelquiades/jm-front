@@ -3,6 +3,7 @@
     <div class="bg-base-200 sm:rounded-lg shadow-md">
       <div class="p-6 text-base-content flex-1 overflow-y-auto">
         <p class="items-center text-center mb-10 font-bold">Usuários</p>
+        <a class="btn btn-primary m-2 btn-sm" href="/users/create"><i class="fa-solid fa-user-plus"></i>Adicionar</a>
         <table class="table w-full">
           <!-- head -->
           <thead>
@@ -111,7 +112,7 @@
               [(ngModel)]="selectedUser.isAdmin"
             />
           </div>
-          
+
           <div class="modal-action">
             <form method="dialog">
               <button class="btn btn-error">Fechar</button>

@@ -3,6 +3,6 @@ export class User {
     name: string = '';
     email: string = '';
     birthdate?: Date;
-    isAdmin: boolean = false;
+    isAdmin?: boolean;
     password: string = '';
   }
