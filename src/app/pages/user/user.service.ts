@@ -7,7 +7,7 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://api-jm.vercel.app/api';
+  private apiUrl = 'https://api-jm.vercel.app/api/api';
 
   constructor(private http: HttpClient) { }
 
