@@ -9,6 +9,7 @@ import { User } from './user.model';
 export class UserService {
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*', // enable cors
   });
 
   constructor(private http: HttpClient) { }
