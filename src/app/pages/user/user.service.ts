@@ -7,31 +7,28 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*', // enable cors
-  });
+  private apiUrl = 'https://api-jm.vercel.app/api';
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('https://api-jm.vercel.app/api/api/users', { headers: this.headers });
+    return this.http.get<User[]>(`${this.apiUrl}/users`, { withCredentials: true });
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`https://api-jm.vercel.app/api/api/users/${id}`, { headers: this.headers });
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`, { withCredentials: true });
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`https://api-jm.vercel.app/api/api/users/${user.id}`, user, { headers: this.headers });
+    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user, { withCredentials: true });
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>('https://api-jm.vercel.app/api/api/users', user, { headers: this.headers });
+    return this.http.post<User>(`${this.apiUrl}/users`, user, { withCredentials: true });
   }
 
   deleteUser(user: User): Observable<User> {
-    return this.http.delete<User>(`https://api-jm.vercel.app/api/api/users/${user.id}`, { headers: this.headers });
+    return this.http.delete<User>(`${this.apiUrl}/users/${user.id}`, { withCredentials: true });
   }
 }
 
