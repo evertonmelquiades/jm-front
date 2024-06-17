@@ -8,9 +8,7 @@ import { User } from './user.model';
 })
 export class UserService {
   private headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
+    'Content-Type': 'application/json',
   });
 
   constructor(private http: HttpClient) { }
@@ -20,11 +18,11 @@ export class UserService {
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`https://api-jm.vercel.app/api/api/users${id}`, { headers: this.headers });
+    return this.http.get<User>(`https://api-jm.vercel.app/api/api/users/${id}`, { headers: this.headers });
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`https://api-jm.vercel.app/api/api/users${user.id}`, user, { headers: this.headers });
+    return this.http.put<User>(`https://api-jm.vercel.app/api/api/users/${user.id}`, user, { headers: this.headers });
   }
 
   createUser(user: User): Observable<User> {
@@ -32,7 +30,7 @@ export class UserService {
   }
 
   deleteUser(user: User): Observable<User> {
-    return this.http.delete<User>(`https://api-jm.vercel.app/api/api/users${user.id}`, { headers: this.headers });
+    return this.http.delete<User>(`https://api-jm.vercel.app/api/api/users/${user.id}`, { headers: this.headers });
   }
 }
 
