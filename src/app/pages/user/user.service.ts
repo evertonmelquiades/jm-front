@@ -11,24 +11,34 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Credentials': 'true',
+    }),
+  };
+
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`, { withCredentials: true });
+    return this.http.get<User[]>(`${this.apiUrl}/users`, this.httpOptions);
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/users/${id}`, { withCredentials: true });
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`, this.httpOptions);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user, { withCredentials: true });
+    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user, this.httpOptions);
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, user, { withCredentials: true });
+    return this.http.post<User>(`${this.apiUrl}/users`, user, this.httpOptions);
   }
 
   deleteUser(user: User): Observable<User> {
-    return this.http.delete<User>(`${this.apiUrl}/users/${user.id}`, { withCredentials: true });
+    return this.http.delete<User>(`${this.apiUrl}/users/${user.id}`, this.httpOptions);
   }
 }
 
