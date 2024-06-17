@@ -10,10 +10,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withFetch(),
-      withXsrfConfiguration({
-        cookieName: 'XSRF-TOKEN', // Nome do cookie onde o token CSRF é armazenado
-        headerName: 'X-XSRF-TOKEN' // Nome do header onde o token CSRF é enviado
-      })
     )
   ]
 };
