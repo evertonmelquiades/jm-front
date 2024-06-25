@@ -9,6 +9,7 @@ import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
 import { catchError, of } from 'rxjs';
+import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-user-create',
@@ -22,6 +23,7 @@ export class UserCreateComponent {
   errorMessage: string | null = null;
 
   constructor(
+    private router: Router,
     private userService: UserService,
     private formBuilder: FormBuilder
   ) {
@@ -52,6 +54,7 @@ export class UserCreateComponent {
         .subscribe(response => {
           if (response) {
             console.log('User created successfully:', response);
+            this.router.navigate(['/users']);
           }
         });
     } else {
