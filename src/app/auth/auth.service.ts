@@ -15,17 +15,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-      'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
-      'Access-Control-Allow-Credentials': 'true',
-    }),
-  };
-
   login(email: string, password: string): Observable<User> {
-    return this.http.post<{ user: User }>(this.apiUrl, { email, password }, this.httpOptions).pipe(
+    return this.http.post<{ user: User }>(this.apiUrl, { email, password }, { withCredentials: true }).pipe(
       map(response => response.user),
       tap(user => {
         this.user = user;
