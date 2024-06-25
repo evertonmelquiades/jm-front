@@ -1,8 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch, withXsrfConfiguration } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -10,10 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withFetch(),
-      withXsrfConfiguration({
-        cookieName: 'XSRF-TOKEN', // Nome do cookie onde o token CSRF é armazenado
-        headerName: 'X-XSRF-TOKEN' // Nome do header onde o token CSRF é enviado
-      })
-    )
+    ),
+    importProvidersFrom(HttpClientModule, HttpClientJsonpModule)
   ]
 };
