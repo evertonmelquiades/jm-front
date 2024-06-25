@@ -10,13 +10,22 @@ import { User } from '../pages/user/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://api-jm.vercel.app/api/login';
+  private apiUrl = 'https://api-jm.vercel.app/api/api/login';
   public user: User | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+      'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
+      'Access-Control-Allow-Credentials': 'true',
+    }),
+  };
+
   login(email: string, password: string): Observable<User> {
-    return this.http.post<{ user: User }>(this.apiUrl, { email, password }, { withCredentials: true }).pipe(
+    return this.http.post<{ user: User }>(this.apiUrl, { email, password }, this.httpOptions).pipe(
       map(response => response.user),
       tap(user => {
         this.user = user;
